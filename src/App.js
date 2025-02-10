@@ -5,6 +5,7 @@ import LoveLetter from './components/LoveLetter';
 import Gallery from './components/Gallery';
 import Confetti from './components/Confetti';
 import AudioPlayer from './components/AudioPlayer';
+import bgImage from './assets/Background.jpg';
 import './index.css';
 
 const App = () => {
@@ -18,21 +19,35 @@ const App = () => {
   };
   const handleNoHover = () => {
     const noButton = document.getElementById('noButton');
-    const x = Math.random() * (window.innerWidth - noButton.offsetWidth);
-    const y = Math.random() * (window.innerHeight - noButton.offsetHeight);
-    noButton.style.position = 'absolute';
-    noButton.style.left = `${x}px`;
-    noButton.style.top = `${y}px`;
+    if (noButton) {
+      const x = Math.random() * (window.innerWidth - noButton.offsetWidth);
+      const y = Math.random() * (window.innerHeight - noButton.offsetHeight);
+      noButton.style.position = 'absolute';
+      noButton.style.left = `${x}px`;
+      noButton.style.top = `${y}px`;
+    }
   };
   const handleShowGallery = () => setPage('gallery');
 
   return (
-    <div className="background">
-      <div className="container">
+    <> {/* 🔥 Wrap everything inside a React Fragment */}
+      <div
+        style={{
+          backgroundImage: `url(${bgImage})`,
+          backgroundRepeat: 'repeat-y',
+          backgroundPosition: 'center center',
+          backgroundSize: 'contain',
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100vw',
+          height: '100vh',
+          zIndex: -1,
+        }}
+      />
+      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         {page === 'home' && <HomePage onShowMessage={handleShowMessage} />}
-        {page === 'message' && (
-          <Message onYes={handleYes} onNoHover={handleNoHover} />
-        )}
+        {page === 'message' && <Message onYes={handleYes} onNoHover={handleNoHover} />}
         {page === 'loveLetter' && (
           <>
             <LoveLetter onShowGallery={handleShowGallery} />
@@ -42,7 +57,7 @@ const App = () => {
         {page === 'gallery' && <Gallery />}
       </div>
       <AudioPlayer />
-    </div>
+    </>
   );
 };
 
