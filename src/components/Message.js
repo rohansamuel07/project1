@@ -1,6 +1,12 @@
-import React from 'react';
+// src/components/Message.js
+import React, { useEffect } from 'react';
 
 const Message = ({ onYes, onNoHover }) => {
+  useEffect(() => {
+    const message = document.querySelector('#message h2');
+    message.classList.add('typewriter');
+  }, []);
+
   return (
     <div id="message">
       <h2>From the moment I met you,</h2>
