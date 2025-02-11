@@ -13,7 +13,6 @@ const Memories = lazy(() => import('./components/Memories'));
 const App = () => {
   const [page, setPage] = useState('home');
   const [showConfetti, setShowConfetti] = useState(false);
-  const [popupMedia, setPopupMedia] = useState(null);
   const audioRef = useRef(null);
 
   useEffect(() => {
@@ -22,35 +21,12 @@ const App = () => {
     }
   }, []);
 
-  const handleShowMessage = () => {
-    setPage('message');
-  };
-
+  const handleShowMessage = () => setPage('message');
   const handleYes = () => {
     setPage('loveLetter');
     setShowConfetti(true);
   };
-
-  const handleNoHover = () => {
-    const noButton = document.getElementById('noButton');
-    if (noButton) {
-      noButton.style.position = 'absolute';
-      noButton.style.left = `${Math.random() * (window.innerWidth - noButton.offsetWidth)}px`;
-      noButton.style.top = `${Math.random() * (window.innerHeight - noButton.offsetHeight)}px`;
-    }
-  };
-
   const handleShowGallery = () => setPage('memories');
-
-  const handleMediaClick = (src, type) => {
-    setPopupMedia({ src, type });
-  };
-
-  const closePopup = (e) => {
-    if (e.target.classList.contains('popup-overlay')) {
-      setPopupMedia(null);
-    }
-  };
 
   return (
     <>
@@ -72,28 +48,17 @@ const App = () => {
       <div className="container enhanced-container fade-in page-transition">
         {page === 'home' && <HomePage onShowMessage={handleShowMessage} />}
         <Suspense fallback={<div className="romantic-loader">Thinking about you... ❤️</div>}>
-          {page === 'message' && <Message onYes={handleYes} onNoHover={handleNoHover} />}
+          {page === 'message' && <Message onYes={handleYes} />}
           {page === 'loveLetter' && (
             <>
               <LoveLetter onShowGallery={handleShowGallery} />
               {showConfetti && <Confetti />}
             </>
           )}
-          {page === 'memories' && <Memories onMediaClick={handleMediaClick} />}
+          {page === 'memories' && <Memories />}
         </Suspense>
       </div>
       <AudioPlayer ref={audioRef} />
-      {popupMedia && (
-        <div className="popup-overlay" onClick={closePopup}>
-          <div className="popup-box">
-            {popupMedia.type === 'image' ? (
-              <img src={popupMedia.src} alt="Popup Media" />
-            ) : (
-              <video src={popupMedia.src} controls autoPlay />
-            )}
-          </div>
-        </div>
-      )}
     </>
   );
 };

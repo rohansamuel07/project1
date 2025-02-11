@@ -9,22 +9,41 @@ const shuffleArray = (array) => {
   return array;
 };
 
-const Memories = ({ onMediaClick }) => {
-  const memories = [
-    'memory1.jpg', 'memory2.jpg', 'memory3.jpg', 'memory4.jpg',
-    'memory5.jpg', 'memory6.jpg', 'memory7.jpg', 'memory8.jpg',
-    'memory9.jpg', 'memory10.jpg', 'memory11.jpg', 'memory12.jpg',
-    'memory13.jpg', 'memory14.jpg', 'memory15.jpg', 'memory16.jpg',
-    'memory17.jpg', 'memory18.jpg', 'memory19.jpg', 'memory20.jpg',
+const Memories = () => {
+  const mediaFiles = [
+    { src: 'memory1.jpg', type: 'image', caption: 'Goofy, crazy, and totally in love! 🤪❤️' },
+    { src: 'memory2.jpg', type: 'image', caption: 'Selfie game strong, love even stronger! 📸💕' },
+    { src: 'memory3.jpg', type: 'image', caption: 'Smiling because life’s better together! 😍' },
+    { src: 'memory4.jpg', type: 'image', caption: 'Cuteness level: Off the charts! 🐶💖' },
+    { src: 'memory5.jpg', type: 'image', caption: 'Looking at her like she’s my whole world… because she is! 😍' },
+    { src: 'memory6.jpg', type: 'image', caption: 'Every second with you is a picture-perfect moment! 💕' },
+    { src: 'memory7.jpg', type: 'image', caption: 'Another selfie, another memory to cherish! 📸✨' },
+    { src: 'memory8.jpg', type: 'image', caption: 'Smiles, love, and a whole lot of happiness! 💖' },
+    { src: 'memory9.jpg', type: 'image', caption: 'Too cute to be real… but she’s mine! 🥺❤️' },
+    { src: 'memory10.jpg', type: 'image', caption: 'Mirror selfies with my forever favorite! ✨📷' },
+    { src: 'memory11.jpg', type: 'image', caption: 'A single click, a thousand feelings! 💑' },
+    { src: 'memory12.jpg', type: 'image', caption: 'Lost in your eyes... 💕' },
+    { src: 'memory13.jpg', type: 'image', caption: 'Holding a flower, holding my heart 🌸' },
+    { src: 'memory14.jpg', type: 'image', caption: 'Goofy mode: ON 🌼😆' },
+    { src: 'memory15.jpg', type: 'image', caption: 'Holding onto each other forever ❤️' },
+    { src: 'memory16.jpg', type: 'image', caption: 'A moment that melts my heart 💞' },
+    { src: 'memory17.jpg', type: 'image', caption: 'Silly selfies = Best selfies 🤪' },
+    { src: 'memory18.jpg', type: 'image', caption: 'Our perfect theatre date 🎭' },
+    { src: 'memory19.jpg', type: 'image', caption: 'First-ever bus ride together 🚌' },
+    { src: 'memory20.jpg', type: 'image', caption: 'Sleepy head on my shoulder 😴❤️' },
+    { src: 'video1.mp4', type: 'video', caption: 'That wink? Instant heart attack! 🔥🥵' },
+    { src: 'video2.mp4', type: 'video', caption: 'Saree on, slay mode activated! 💃❤️' },
+    { src: 'video3.mp4', type: 'video', caption: 'Goofy yet irresistible—best combo ever! 😏🤣' },
+    { src: 'video4.mp4', type: 'video', caption: 'A kiss to remember forever! 😘💕' },
+    { src: 'video5.mp4', type: 'video', caption: 'Her cuteness should be illegal! 🥺💖' },
+    { src: 'video6.mp4', type: 'video', caption: 'Radiating goddess energy with every move! ✨👑' },
+    { src: 'video7.mp4', type: 'video', caption: 'One kiss, and my heart is hers forever! 😘💞' },
+    { src: 'video8.mp4', type: 'video', caption: 'Even after a long day, she’s still breathtaking! 😍' },
+    { src: 'video9.mp4', type: 'video', caption: 'My one and only princess, no crown needed! 👑💖' },
+    { src: 'video10.mp4', type: 'video', caption: 'Dog lover certified, heart stealer confirmed! 🐶💕' }
   ];
 
-  const videos = [
-    'video1.mp4', 'video2.mp4', 'video3.mp4', 'video4.mp4',
-    'video5.mp4', 'video6.mp4', 'video7.mp4', 'video8.mp4',
-    'video9.mp4', 'video10.mp4'
-  ];
-
-  const mediaFiles = shuffleArray([...memories, ...videos]);
+  const shuffledMedia = shuffleArray([...mediaFiles]);
 
   useEffect(() => {
     const audio = document.getElementById('backgroundMusic');
@@ -45,26 +64,16 @@ const Memories = ({ onMediaClick }) => {
     <div className="container">
       <h1>I Love You ❤️</h1>
       <div className="gallery">
-        {mediaFiles.map((file, index) => {
-          const isVideo = file.endsWith('.mp4');
-          return isVideo ? (
-            <video
-              key={index}
-              src={`/assets/${file}`}
-              autoPlay
-              muted // This line was added to mute all videos, preventing them from playing sound automatically.
-              loop
-              onClick={() => onMediaClick(`/assets/${file}`, 'video')}
-            />
-          ) : (
-            <img
-              key={index}
-              src={`/assets/${file}`}
-              alt={`Memory ${index + 1}`}
-              onClick={() => onMediaClick(`/assets/${file}`, 'image')}
-            />
-          );
-        })}
+        {shuffledMedia.map((file, index) => (
+          <div key={index} className="polaroid">
+            {file.type === 'image' ? (
+              <img src={`/assets/${file.src}`} alt={`Memory ${index + 1}`} />
+            ) : (
+              <video src={`/assets/${file.src}`} muted autoPlay loop playsInline />
+            )}
+            <p className="caption">{file.caption}</p>
+          </div>
+        ))}
       </div>
       <audio id="backgroundMusic" loop>
         <source src="/assets/music.mp3" type="audio/mpeg" />

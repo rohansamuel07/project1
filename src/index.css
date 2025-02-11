@@ -119,6 +119,27 @@ button:hover {
   padding: 10px;
 }
 
+/* Polaroid Effect */
+.polaroid {
+  background: white;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  max-width: 200px;
+  text-align: center;
+  transform: rotate(-3deg);
+  position: relative;
+}
+
+.polaroid:hover {
+  transform: rotate(0deg) scale(1.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
 /* Enhanced Gallery Hover Effect */
 .gallery img, .gallery video {
   width: 100%;
@@ -132,6 +153,19 @@ button:hover {
   transform: scale(1.1);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   z-index: 10;
+}
+
+/* Caption Styling */
+.caption {
+  font-size: 0.9rem;
+  font-style: italic;
+  margin-top: 8px;
+  color: #444;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 5px 10px;
+  border-radius: 5px;
+  width: 100%;
+  text-align: center;
 }
 
 /* Floating Hearts Animation */
@@ -206,37 +240,4 @@ button:hover {
 
 .gallery::-webkit-scrollbar-thumb:hover {
   background: #c0392b;
-}
-
-/* Popup Overlay */
-.popup-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.8);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-/* Large Media Pop-up */
-.popup-box {
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  max-width: 80%;
-  max-height: 80%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.popup-box img, .popup-box video {
-  max-width: 100%;
-  max-height: 80vh;
-  border-radius: 10px;
 }
