@@ -13,6 +13,7 @@ const Memories = lazy(() => import('./components/Memories'));
 const App = () => {
   const [page, setPage] = useState('home');
   const [showConfetti, setShowConfetti] = useState(false);
+  const [popupMedia, setPopupMedia] = useState(null);
   const audioRef = useRef(null);
 
   const handleShowMessage = () => {
@@ -36,6 +37,16 @@ const App = () => {
 
   const handleShowGallery = () => setPage('memories');
 
+  const handleMediaClick = (src, type) => {
+    setPopupMedia({ src, type });
+  };
+
+  const closePopup = (e) => {
+    if (e.target.classList.contains('popup-overlay')) {
+      setPopupMedia(null);
+    }
+  };
+
   return (
     <>
       <div
@@ -50,9 +61,10 @@ const App = () => {
           backgroundPosition: 'center center',
           backgroundSize: 'contain',
           zIndex: -1,
+          animation: 'fadeIn 1.5s ease-in-out',
         }}
       />
-      <div className="container enhanced-container">
+      <div className="container enhanced-container fade-in page-transition">
         {page === 'home' && <HomePage onShowMessage={handleShowMessage} />}
         <Suspense fallback={<div className="romantic-loader">Thinking about you... ❤️</div>}>
           {page === 'message' && <Message onYes={handleYes} onNoHover={handleNoHover} />}
@@ -62,10 +74,21 @@ const App = () => {
               {showConfetti && <Confetti />}
             </>
           )}
-          {page === 'memories' && <Memories />}
+          {page === 'memories' && <Memories onMediaClick={handleMediaClick} />}
         </Suspense>
       </div>
       <AudioPlayer ref={audioRef} />
+      {popupMedia && (
+        <div className="popup-overlay" onClick={closePopup}>
+          <div className="popup-box">
+            {popupMedia.type === 'image' ? (
+              <img src={popupMedia.src} alt="Popup Media" />
+            ) : (
+              <video src={popupMedia.src} controls autoPlay />
+            )}
+          </div>
+        </div>
+      )}
     </>
   );
 };

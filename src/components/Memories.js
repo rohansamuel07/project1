@@ -1,17 +1,15 @@
 // src/components/Memories.js
 import React, { useEffect } from 'react';
 
-// Function to shuffle an array (Fisher-Yates algorithm)
 const shuffleArray = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+    [array[i], array[j]] = [array[j], array[i]];
   }
   return array;
 };
 
-const Memories = () => {
-  // Separate arrays for memories and videos
+const Memories = ({ onMediaClick }) => {
   const memories = [
     'memory1.jpg', 'memory2.jpg', 'memory3.jpg', 'memory4.jpg',
     'memory5.jpg', 'memory6.jpg', 'memory7.jpg', 'memory8.jpg',
@@ -26,7 +24,6 @@ const Memories = () => {
     'video9.mp4', 'video10.mp4'
   ];
 
-  // Combine and shuffle the arrays to mix pics and videos evenly
   const mediaFiles = shuffleArray([...memories, ...videos]);
 
   useEffect(() => {
@@ -57,12 +54,14 @@ const Memories = () => {
               autoPlay
               muted
               loop
+              onClick={() => onMediaClick(`/assets/${file}`, 'video')}
             />
           ) : (
             <img
               key={index}
               src={`/assets/${file}`}
               alt={`Memory ${index + 1}`}
+              onClick={() => onMediaClick(`/assets/${file}`, 'image')}
             />
           );
         })}
