@@ -9,7 +9,7 @@ const AudioPlayer = forwardRef((props, ref) => {
   }, [ref]);
 
   return (
-    <audio ref={ref} loop>
+    <audio ref={ref} loop autoPlay>
       <source src="/assets/music.mp3" type="audio/mpeg" />
       Your browser does not support the audio element.
     </audio>

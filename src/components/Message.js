@@ -56,7 +56,7 @@ const Message = ({ onYes }) => {
       <h2>From the moment I met you, something felt different... ✨</h2>
       <p>You light up my world in ways I never knew were possible. Every laugh, every moment, every little thing about you makes life more beautiful.</p>
       <p>You're the reason my heart races, the reason I smile at random, and the one person I never want to stop making memories with.</p>
-      <h1>So… will you be my Galentine? ❤️</h1>
+      <h1>So… will you be my Valentine? ❤️</h1>
       <div className="buttons">
         <button id="yesButton" onClick={onYes}>Yes! A thousand times YES! 💖</button>
         <button id="noButton" onClick={handleNoClick}>

@@ -1,5 +1,5 @@
 // src/App.js
-import React, { useState, useRef, lazy, Suspense } from 'react';
+import React, { useState, useRef, useEffect, lazy, Suspense } from 'react';
 import HomePage from './components/HomePage';
 import AudioPlayer from './components/AudioPlayer';
 import bgImage from './assets/Background.jpg';
@@ -16,9 +16,14 @@ const App = () => {
   const [popupMedia, setPopupMedia] = useState(null);
   const audioRef = useRef(null);
 
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.play().catch((err) => console.error('Audio playback failed:', err));
+    }
+  }, []);
+
   const handleShowMessage = () => {
     setPage('message');
-    audioRef.current?.play().catch((err) => console.error('Audio playback failed:', err));
   };
 
   const handleYes = () => {

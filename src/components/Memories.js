@@ -52,7 +52,7 @@ const Memories = ({ onMediaClick }) => {
               key={index}
               src={`/assets/${file}`}
               autoPlay
-              muted
+              muted // This line was added to mute all videos, preventing them from playing sound automatically.
               loop
               onClick={() => onMediaClick(`/assets/${file}`, 'video')}
             />
