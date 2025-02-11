@@ -16,9 +16,15 @@ const App = () => {
   const audioRef = useRef(null);
 
   useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.play().catch((err) => console.error('Audio playback failed:', err));
-    }
+    const enableAudio = () => {
+      if (audioRef.current) {
+        audioRef.current.play().catch((err) => console.error('Audio playback failed:', err));
+      }
+      document.removeEventListener('click', enableAudio);
+    };
+
+    document.addEventListener('click', enableAudio);
+    return () => document.removeEventListener('click', enableAudio);
   }, []);
 
   const handleShowMessage = () => setPage('message');
