@@ -18,25 +18,27 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  /* background: url('assets/background.jpg') repeat-y center center; */
   background-size: contain;
   z-index: -1;
 }
 
+/* Enhanced Container */
 .container {
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.95);
   padding: 40px;
-  border-radius: 15px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
   max-width: 900px;
   width: 100%;
   position: absolute;
   z-index: 1;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%); /* Centering */
+  transform: translate(-50%, -50%);
 }
 
+/* Header Styles */
 h1 {
   font-family: 'Pacifico', cursive;
   font-size: 2.5rem;
@@ -53,21 +55,24 @@ p {
   margin: 20px 0;
 }
 
+/* Improved Buttons */
 button {
-  background: #e74c3c;
+  background: linear-gradient(135deg, #ff7eb3, #ff758c);
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 12px 24px;
   font-size: 1.2rem;
-  border-radius: 5px;
+  border-radius: 10px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
 button:hover {
-  background: #c0392b;
+  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  transform: scale(1.05);
 }
 
+/* Button Container */
 .buttons {
   display: flex;
   justify-content: center;
@@ -75,6 +80,7 @@ button:hover {
   margin-top: 30px;
 }
 
+/* No Button */
 #noButton {
   background: #95a5a6;
 }
@@ -83,35 +89,38 @@ button:hover {
   background: #7f8c8d;
 }
 
+/* Hidden Elements */
 .hidden {
   display: none;
 }
 
+/* Confetti Section */
 #confetti h1 {
   font-size: 2rem;
   color: #e74c3c;
 }
 
+/* Gallery Grid */
 .gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Responsive grid */
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 10px;
   margin-top: 20px;
-  max-height: 70vh; /* Limit height to prevent overflow */
-  overflow-y: auto; /* Add scroll if needed */
-  padding: 10px; /* Add padding for better spacing */
+  max-height: 70vh;
+  overflow-y: auto;
+  padding: 10px;
 }
 
 .gallery img, .gallery video {
   width: 100%;
-  height: 150px; /* Fixed height for uniformity */
+  height: 150px;
   border-radius: 10px;
   object-fit: cover;
   transition: transform 0.3s ease;
 }
 
 .gallery img:hover, .gallery video:hover {
-  transform: scale(1.1); /* Zoom effect on hover */
+  transform: scale(1.1);
 }
 
 /* Floating Hearts Animation */
@@ -146,6 +155,15 @@ button:hover {
   margin: 0 auto;
   letter-spacing: 0.15em;
   animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+/* Romantic Loader (New) */
+.romantic-loader {
+  font-size: 1.5rem;
+  color: #ff758c;
+  font-family: 'Pacifico', cursive;
+  text-align: center;
+  padding: 20px;
 }
 
 /* Scrollbar Styling for Gallery */

@@ -52,9 +52,9 @@ const App = () => {
           zIndex: -1,
         }}
       />
-      <div className="container">
+      <div className="container enhanced-container">
         {page === 'home' && <HomePage onShowMessage={handleShowMessage} />}
-        <Suspense fallback={<div>Thinking about you... ❤️</div>}>
+        <Suspense fallback={<div className="romantic-loader">Thinking about you... ❤️</div>}>
           {page === 'message' && <Message onYes={handleYes} onNoHover={handleNoHover} />}
           {page === 'loveLetter' && (
             <>
