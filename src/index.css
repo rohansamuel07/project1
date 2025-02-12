@@ -253,3 +253,41 @@ button.heartbeat:hover {
 .gallery::-webkit-scrollbar-thumb:hover {
   background: #c0392b;
 }
+
+.love-spark {
+  position: absolute;
+  font-size: 1.2rem;
+  color: #ff4f70;
+  animation: fadeOut 1s forwards;
+  pointer-events: none;
+  z-index: 9999; /* Make sure hearts are always on top */
+}
+
+@keyframes fadeOut {
+  0% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(2); }
+}
+
+.love-meter-container {
+  width: 80%;
+  max-width: 400px;
+  background: #ff4f70;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 20px auto;
+  position: relative;
+}
+
+.love-meter {
+  height: 20px;
+  width: 0%;
+  background: #ffeb3b;
+  transition: width 0.5s ease-in-out;
+}
+
+.love-text {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 1.2rem;
+  color: #fff;
+}

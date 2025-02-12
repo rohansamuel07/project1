@@ -4,6 +4,7 @@ import HomePage from './components/HomePage';
 import AudioPlayer from './components/AudioPlayer';
 import bgImage from './assets/Background.jpg';
 import './index.css';
+import confetti from 'canvas-confetti';
 
 const Message = lazy(() => import('./components/Message'));
 const LoveLetter = lazy(() => import('./components/LoveLetter'));
@@ -13,6 +14,7 @@ const Memories = lazy(() => import('./components/Memories'));
 const App = () => {
   const [page, setPage] = useState('home');
   const [showConfetti, setShowConfetti] = useState(false);
+  const [love, setLove] = useState(0);
   const audioRef = useRef(null);
 
   useEffect(() => {
@@ -27,12 +29,31 @@ const App = () => {
     return () => document.removeEventListener('click', enableAudio);
   }, []);
 
+  useEffect(() => {
+    const createLoveSpark = (e) => {
+      const heart = document.createElement('div');
+      heart.classList.add('love-spark');
+      heart.innerText = '💖';
+      heart.style.left = `${e.clientX}px`;
+      heart.style.top = `${e.clientY}px`;
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 1000);
+    };
+
+    window.addEventListener('mousemove', createLoveSpark);
+    return () => window.removeEventListener('mousemove', createLoveSpark);
+  }, []);
+
   const handleShowMessage = () => setPage('message');
   const handleYes = () => {
     setPage('loveLetter');
     setShowConfetti(true);
+    confetti({ particleCount: 200, spread: 90, origin: { y: 0.7 } });
   };
   const handleShowGallery = () => setPage('memories');
+  const increaseLove = () => {
+    setLove((prev) => (prev < 100 ? prev + 10 : 100));
+  };
 
   return (
     <>
@@ -59,6 +80,11 @@ const App = () => {
             <>
               <LoveLetter onShowGallery={handleShowGallery} />
               {showConfetti && <Confetti />}
+              <div className="love-meter-container">
+                <div className="love-meter" style={{ width: `${love}%` }}></div>
+              </div>
+              <p className="love-text">{love === 100 ? 'Full of Love! ❤️' : `Love Level: ${love}%`}</p>
+              <button onClick={increaseLove}>Send Love 💕</button>
             </>
           )}
           {page === 'memories' && <Memories />}
