@@ -10,7 +10,7 @@ body {
   height: 100vh;
   text-align: center;
   overflow: hidden;
-} 
+}
 
 /* Background */
 .background {
@@ -21,14 +21,15 @@ body {
   height: 100%;
   background-size: contain;
   z-index: -1;
-} 
+  animation: heartbeat-bg 5s infinite alternate ease-in-out;
+}
 
-/* Glassmorphism Effect for Enhanced Container */
+/* Glowing Container */
 .enhanced-container {
   background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 20px rgba(255, 105, 180, 0.5);
   padding: 40px;
   border-radius: 20px;
   transition: all 0.3s ease-in-out;
@@ -40,7 +41,70 @@ body {
   top: 50%;
   transform: translate(-50%, -50%);
   animation: fadeIn 1.5s ease-in-out;
-} 
+}
+
+/* Fading "I Love You" Message */
+.love-final-message {
+  font-size: 1.5rem;
+  color: #ff3155;
+  font-weight: bold;
+  animation: fadeIn 2s ease-in-out;
+}
+
+/* Love Meter Styles */
+.love-meter-container {
+  width: 80%;
+  max-width: 400px;
+  background: #ff4f70;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 20px auto;
+  position: relative;
+}
+
+.love-meter {
+  height: 20px;
+  width: 0%;
+  background: #ffeb3b;
+  transition: width 0.5s ease-in-out;
+}
+
+.love-text {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 1.2rem;
+  color: #fff;
+}
+
+/* Love Button */
+.love-button {
+  background: #ff4f70;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1.2rem;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.love-button:hover {
+  background: #ff3155;
+  box-shadow: 0px 5px 15px rgba(255, 50, 80, 0.6);
+  animation: heartbeat 0.8s infinite alternate;
+}
+
+/* Background Animation */
+@keyframes heartbeat-bg {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+/* Fade-in Effect */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
 
 /* Smooth Page Transition */
 .page-transition {
@@ -223,18 +287,6 @@ button.heartbeat:hover {
   padding: 20px;
 }
 
-/* Smooth Fade-in Effect */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
 /* Scrollbar Styling for Gallery */
 .gallery::-webkit-scrollbar {
   width: 8px;
@@ -266,28 +318,4 @@ button.heartbeat:hover {
 @keyframes fadeOut {
   0% { opacity: 1; transform: scale(1); }
   100% { opacity: 0; transform: scale(2); }
-}
-
-.love-meter-container {
-  width: 80%;
-  max-width: 400px;
-  background: #ff4f70;
-  border-radius: 10px;
-  overflow: hidden;
-  margin: 20px auto;
-  position: relative;
-}
-
-.love-meter {
-  height: 20px;
-  width: 0%;
-  background: #ffeb3b;
-  transition: width 0.5s ease-in-out;
-}
-
-.love-text {
-  text-align: center;
-  margin-top: 10px;
-  font-size: 1.2rem;
-  color: #fff;
 }

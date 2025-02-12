@@ -48,11 +48,32 @@ const App = () => {
   const handleYes = () => {
     setPage('loveLetter');
     setShowConfetti(true);
-    confetti({ particleCount: 200, spread: 90, origin: { y: 0.7 } });
+    confetti({
+      particleCount: 200,
+      spread: 90,
+      origin: { y: 0.7 },
+      colors: ['#ff4f70', '#ff758c', '#ffeb3b', '#00c3ff', '#a29bfe'],
+    });
   };
   const handleShowGallery = () => setPage('memories');
   const increaseLove = () => {
-    setLove((prev) => (prev < 100 ? prev + 10 : 100));
+    if (love < 100) {
+      setLove((prev) => prev + 10);
+      
+      // ❤️ Small heart explosion effect
+      confetti({
+        particleCount: 30,
+        spread: 50,
+        origin: { x: 0.5, y: 0.8 },
+        colors: ['#ff4f70', '#ff758c', '#ffeb3b', '#00c3ff', '#a29bfe'],
+        shapes: ['circle'],
+      });
+
+      // Show message when love is full
+      if (love + 10 >= 100) {
+        setTimeout(() => alert("Your love is overflowing! ❤️🎉"), 500);
+      }
+    }
   };
 
   return (
@@ -83,8 +104,11 @@ const App = () => {
               <div className="love-meter-container">
                 <div className="love-meter" style={{ width: `${love}%` }}></div>
               </div>
-              <p className="love-text">{love === 100 ? 'Full of Love! ❤️' : `Love Level: ${love}%`}</p>
-              <button onClick={increaseLove}>Send Love 💕</button>
+              <p className="love-text">{love === 100 ? 'Full of Love!!' : `Love Level: ${love}%`}</p>
+              {love === 100 && <p className="love-final-message">I LOVE YOU! 💖</p>}
+              <button className="love-button" onClick={increaseLove}>
+                {love === 100 ? "Love Overflowing! ❤️" : "Send Love 💕"}
+              </button>
             </>
           )}
           {page === 'memories' && <Memories />}
